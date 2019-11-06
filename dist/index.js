@@ -118,7 +118,6 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"index.js":[function(require,module,exports) {
-//Dom elements
 var searchForm = document.getElementById('search-form');
 var searchInput = document.getElementById('search-input'); //form event listener
 
@@ -144,17 +143,7 @@ function showMessage(message, className) {
 
   div.className = "alert ".concat(className); //add text
 
-  div.appendChild(document.createTextNode(message)); //Get parent container id of search-container and id of searchForm
-
-  var searchContainer = document.getElementById('search-container'); //get search
-
-  var search = document.getElementById('search'); //insert message insert div before search element
-
-  searchContainer.insertBefore(div, search); //timeout alert
-
-  setTimeout(function () {
-    return document.querySelector('.alert').remove();
-  }, 3000);
+  div.appendChild(document.createTextNode(message));
 }
 },{}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -184,7 +173,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58281" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54593" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -361,4 +350,4 @@ function hmrAcceptRun(bundle, id) {
   }
 }
 },{}]},{},["../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
-//# sourceMappingURL=/redditSearchApp.e31bb0bc.js.map
+//# sourceMappingURL=/index.js.map

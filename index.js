@@ -1,3 +1,4 @@
+//Dom elements
 const searchForm = document.getElementById('search-form');
 const searchInput = document.getElementById('search-input');
 
@@ -14,8 +15,7 @@ searchForm.addEventListener('submit', (e)=>{
   //check input
   if (searchTerm === '') {
     //show message
-    showMessage('Please add a seach term',
-  'alert-danger');
+    showMessage('Please add a seach term', 'alert-danger');
   }
 
   e.preventDefault();
@@ -29,4 +29,15 @@ function showMessage(message, className){
   div.className = `alert ${className}`;
   //add text
   div.appendChild(document.createTextNode(message));
+  //Get parent container id of search-container and id of searchForm
+  const searchContainer = document.getElementById('search-container');
+  //get search
+  const search = document.getElementById('search');
+
+//insert message insert div before search element
+searchContainer.insertBefore(div, search);
+
+//timeout alert
+setTimeout(() => document.querySelector('.alert').remove(), 3000);
+
 }
