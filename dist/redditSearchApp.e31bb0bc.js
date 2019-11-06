@@ -117,7 +117,30 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"index.js":[function(require,module,exports) {
+})({"redditapi.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  search: function search(searchTerm, searchLimit, sortBy) {
+    fetch("http://www.reddit.com/search.json?q=".concat(searchTerm)).then(function (res) {
+      return res.json();
+    }).then(function (data) {
+      return console.log(data);
+    });
+  }
+};
+exports.default = _default;
+},{}],"index.js":[function(require,module,exports) {
+"use strict";
+
+var _redditapi = _interopRequireDefault(require("./redditapi"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //Dom elements
 var searchForm = document.getElementById('search-form');
 var searchInput = document.getElementById('search-input'); //form event listener
@@ -133,7 +156,12 @@ searchForm.addEventListener('submit', function (e) {
   if (searchTerm === '') {
     //show message
     showMessage('Please add a seach term', 'alert-danger');
-  }
+  } //clear input
+
+
+  searchInput.value = ''; //Search Reddit
+
+  _redditapi.default.search(searchTerm, searchLimit, sortBy);
 
   e.preventDefault();
 }); // Show message
@@ -156,7 +184,7 @@ function showMessage(message, className) {
     return document.querySelector('.alert').remove();
   }, 3000);
 }
-},{}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./redditapi":"redditapi.js"}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -184,7 +212,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58281" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55898" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
