@@ -126,10 +126,12 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _default = {
   search: function search(searchTerm, searchLimit, sortBy) {
-    fetch("http://www.reddit.com/search.json?q=".concat(searchTerm)).then(function (res) {
+    return fetch("http://www.reddit.com/search.json?q=".concat(searchTerm, "\n      &sort=").concat(sortBy, "&limit=").concat(searchLimit)).then(function (res) {
       return res.json();
     }).then(function (data) {
-      return console.log(data);
+      return data.data.children.map(function (data) {
+        return data.data;
+      });
     });
   }
 };
@@ -212,7 +214,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55898" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53360" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
