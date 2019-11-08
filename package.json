@@ -4,8 +4,14 @@
   "description": "reddit search app",
   "main": "index.js",
   "scripts": {
+    "start": "parcel index.html",
+    "predeploy": "rm -rf dist && parcel build index.html",
+    "deploy": "gh-pages -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Mark Wild",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "parcel": "^1.12.4"
+  }
 }
