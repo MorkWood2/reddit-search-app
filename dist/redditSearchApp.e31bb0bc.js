@@ -132,6 +132,8 @@ var _default = {
       return data.data.children.map(function (data) {
         return data.data;
       });
+    }).catch(function (err) {
+      return console.log(err);
     });
   }
 };
@@ -163,7 +165,17 @@ searchForm.addEventListener('submit', function (e) {
 
   searchInput.value = ''; //Search Reddit
 
-  _redditapi.default.search(searchTerm, searchLimit, sortBy);
+  _redditapi.default.search(searchTerm, searchLimit, sortBy).then(function (results) {
+    var output = '<div class="card-columns">';
+    results.forEach(function (post) {
+      // console.log(results);
+      //check for image
+      var image = post.preview ? post.preview.images[0].source.url : 'https://altosagency.com/images/blog/2019/september/reddit_advertising_blog/reddit-blog-post-hero-large.jpg';
+      output += "\n      <div class=\"card\">\n      <img class=\"card-img-top\" src=\"".concat(image, "\" alt=\"Card image cap\">\n      <div class=\"card-body\">\n      <h5 class=\"card-title\">").concat(post.title, "</h5>\n      <p class=\"card-text\">").concat(truncateText(post.selftext, 100), "</p>\n      <a href=\"").concat(post.url, "\"  target =\"blank\" class=\"btn btn-primary\">Read more</a>\n      <hr>\n      <span class = \"badge badge-secondary\">Subreddit:\n      ").concat(post.subreddit, "\n      </span>\n      <span class = \"badge badge-dark\">Score:\n      ").concat(post.score, "\n      </span>\n      </div>\n      </div>\n      ");
+    });
+    output += "</div>";
+    document.getElementById('results').innerHTML = output; // console.log(results);
+  });
 
   e.preventDefault();
 }); // Show message
@@ -185,6 +197,13 @@ function showMessage(message, className) {
   setTimeout(function () {
     return document.querySelector('.alert').remove();
   }, 3000);
+} //truncate text
+
+
+function truncateText(text, limit) {
+  var shortened = text.indexOf(' ', limit);
+  if (shortened == -1) return text;
+  return text.substring(0, shortened);
 }
 },{"./redditapi":"redditapi.js"}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -214,7 +233,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53360" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62930" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
